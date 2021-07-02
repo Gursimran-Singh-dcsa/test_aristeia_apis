@@ -1,0 +1,93 @@
+
+form {
+  padding-top: 45px;
+  width: 100%;
+  height: calc(100vh - 93px);
+}
+.playapi {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  justify-items: center;
+  height: 100%;
+}
+textarea, textarea:focus{
+  height: 100px;
+  background-color: #FCF5D8;
+  color: black;
+  outline: none;
+  font-weight: bolder;
+  border: none;
+  border-radius: 10px;
+  width: 45vw;
+  height: 100%;
+}
+.inputoutput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 50%;
+  width: 100vw;
+}
+.playapiurl, .playapiurl:focus {
+  width: 150%;
+  border: none;
+  border-radius: 20px;
+  height: 60px;
+  outline-style: none;
+  outline: none;
+  flex: auto;
+  font-size: large;
+  background-color: #FCF5D8;
+  color: black;
+  font-weight: bolder;
+}
+.playapiselect , .playapiselect:focus, .playapiselect option{
+  border: none;
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: medium;
+  height: 60px;
+  outline-style: none;
+  outline: none;
+  width: 15rem;
+  margin-left: 3rem;
+}
+.flexContainer{
+  display: flex;
+  flex-direction: row;
+}
+.submitButton {
+  width: 50%;
+  align-self: center;
+  cursor: pointer;
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  background-color: #FCF5D8;
+  font-weight: 900;
+}
+.input, .output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.output span {
+  align-self: center;
+  color: greenyellow;
+}
+.input span {
+  text-align: center;
+  color: orange;
+}
+.nameofapi {
+  width: 100vw;
+  text-align: center;
+  text-transform: uppercase;
+  color: greenyellow;
+  font-weight: bolder;
+  font-size: x-large;
+}
