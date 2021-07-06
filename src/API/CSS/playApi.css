@@ -23,6 +23,9 @@ textarea, textarea:focus{
   width: 45vw;
   height: 100%;
 }
+.onlyOp {
+  width: 90vw;
+}
 .inputoutput {
   display: flex;
   flex-direction: row;
