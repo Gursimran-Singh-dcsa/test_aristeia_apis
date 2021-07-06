@@ -1,7 +1,7 @@
 const ApiData = [
   {
     name: 'testing Products API',
-    url: 'https://testproductsapi.weblogssl.com',
+    url: 'http://testproductapi.weblogssl.com',
     key: 'xZThmN2JkMzk1OTg=NzhmNDczNWQOWEyYzM5OTEzYmZl',
     openUp: false
   },

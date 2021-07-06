@@ -1,5 +1,6 @@
 import './CSS/playApi.css';
 import { useState } from 'react';
+import hitUrl from './ajax';
 
 const PlayApi = (props) => {
   const [playData, setPlayData] = useState(
@@ -9,16 +10,10 @@ const PlayApi = (props) => {
       requestBody: JSON.stringify({
         "key1": "value1",
         "key2": "value2"
-      })
+      }),
+      responseBody: ''
     }
   );
-
-  const [error, setError] = useState(
-    {
-      isExist: false,
-      message: ''
-    }
-  )
 
   const httpSelectorHandler = (event) => {
     setPlayData((prevPlayData) => {
@@ -39,16 +34,25 @@ const PlayApi = (props) => {
 
   const formSaveHandler = (event) => {
     event.preventDefault();
+    // code to hit on API and set Response
+    const res = hitUrl({...playData, apiKey: props.data.key}).then(response => {
+      const data = response.body;
+      const reader = data.getReader();
+      reader.read().then(({done, value}) => {
+        const ans = new TextDecoder().decode(value);
+        setPlayData((prevPlayData) => {
+          return {
+            ...prevPlayData, responseBody: ans
+          }
+        })
+        if (done) {
+          return;
+        }
+      });
+    })
   }
 
   const requestPayLoadHandler = (event) => {
-    if ('GET' == playData.httpMethod) {
-      setError({
-        isExist: true,
-        message: 'Can\'t Edit this field in GET method'
-      })
-      return;
-    }
     setPlayData((prevPlayData) => {
       return {
         ...prevPlayData,
@@ -59,7 +63,6 @@ const PlayApi = (props) => {
   return (
     <form >
       <div className="nameofapi">{props.data.name}</div>
-      {error.isExist && <div className="errorMessage">{error.message}</div>}
       <div className="playapi">
         <div className="flexContainer">
           <input className="playapiurl" value={playData.requestUrl} onChange={UrlHandler} />
@@ -70,12 +73,12 @@ const PlayApi = (props) => {
         </select>
         </div>
         <div className="inputoutput">
-          <div className ="input">
-            <span>Add Request Payload:</span><textarea value={'GET' == playData.httpMethod ? 'Can\'t edit this!!': playData.requestBody} onChange={requestPayLoadHandler} />
-          </div>
+          { 'GET' !== playData.httpMethod && <div className ="input">
+            <span>Add Request Payload:</span><textarea value={playData.requestBody} onChange={requestPayLoadHandler} />
+          </div> }
           <div className="output">
             <span>Response:</span>
-            <textarea />
+            <textarea value={playData.responseBody} className={'GET' === playData.httpMethod ? 'onlyOp' : ''} readOnly />
           </div>
         </div>
         <button className="submitButton" type="submit" onClick={formSaveHandler}>Hit now!!</button>
